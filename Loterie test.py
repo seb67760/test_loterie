@@ -15,8 +15,8 @@ st.title("🎯 Analyse Loto")
 
 @st.cache_data
 
-url = "https://loto.akroweb.fr/loto-historique-tirages"
-html = requests.get(url).content
+'url = "https://loto.akroweb.fr/loto-historique-tirages"
+html = requests.get("https://loto.akroweb.fr/loto-historique-tirages").content
 df = pd.read_html(html)[0][[2,4,5,6,7,8,9]]
 
 df.columns = [
