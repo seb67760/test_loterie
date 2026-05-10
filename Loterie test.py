@@ -49,16 +49,4 @@ with col2:
     WINDOW_SIZE = st.slider("Fenêtre d'analyse", 5, 100, 10)
 
 # =====================================================
-# CHARGEMENT
-# =====================================================
-
-with st.spinner("Chargement des données..."):
-    df = load_data(nb_tirages)
-
-st.subheader("Derniers tirages")
-st.dataframe(df)
-
-values = df[
-    [
-        "boule_1",
     st.dataframe(df_scores)
