@@ -18,9 +18,15 @@ def load_data(nb_tirages=150):
 
     url = "https://loto.akroweb.fr/loto-historique-tirages"
 
-    html = requests.get(url).content
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
 
-    df = pd.read_html(html)[0][[2,4,5,6,7,8,9]]
+    response = requests.get(url, headers=headers)
+
+    tables = pd.read_html(response.text)
+
+    df = tables[0][[2,4,5,6,7,8,9]]
 
     df.columns = [
         "date_de_tirage",
