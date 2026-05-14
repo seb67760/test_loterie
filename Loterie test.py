@@ -4,6 +4,7 @@ import numpy as np
 import requests
 import itertools
 from itertools import product
+from io import StringIO
 
 st.set_page_config(page_title="Analyse Loto", layout="wide")
 
@@ -24,7 +25,7 @@ def load_data(nb_tirages=150):
 
     response = requests.get(url, headers=headers)
 
-    tables = pd.read_html(response.text)
+    tables = pd.read_html(StringIO(response.text))
 
     df = tables[0][[2,4,5,6,7,8,9]]
 
