@@ -166,7 +166,7 @@ if st.button("Calculer"):
 
     top5 = [n for n, s in classement[:5]]
 
-    st.success(f"Numéros proposés : {sorted(top5)}")
+    st.success(f"Numéros proposés : {top5}")
 
     df_scores = pd.DataFrame(classement, columns=["Numéro", "Score"])
 
