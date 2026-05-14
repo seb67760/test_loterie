@@ -81,21 +81,15 @@ values = df[
 # =====================================================
 
 def rank_frequencies(window):
-
     freq = {}
-
     for tirage in window:
         for n in tirage:
             freq[n] = freq.get(n, 0) + 1
-
-    return {
-        n: r
-        for r, (n, _) in enumerate(
-            sorted(freq.items(), key=lambda x: (-x[1], x[0])),
+    return {n: r for r, (n, _) in 
+            enumerate(sorted(freq.items(), key=lambda x: (-x[1], x[0])),
             start=1
         )
     }
-
 
 def rank_recency(window):
 
@@ -135,6 +129,39 @@ def rank_duos(window):
             start=1
         )
     }
+
+# Frequence star
+def rank_frequencies_ch(chances):
+    freq = {}
+    for s in chances:
+        freq[s] = freq.get(s,0)+1
+    return {s:r for r,(s,_) in 
+            enumerate(sorted(freq.items(), key=lambda x:(-x[1], x[0])), start=1)}
+
+# Récence star
+def rank_recency_ch(chances):
+    rec = {}
+    for idx, s in enumerate(chances):
+        rec[s] = idx
+
+    return {s:r for r,(s,_) in 
+            enumerate(sorted(rec.items(), key=lambda x:(x[1], x[0])), start=1)}
+
+# Duos (étoiles consécutives) star
+def rank_duos_ch(chances):
+    duo_freq = {}
+
+    for i in range(len(chances)-1):
+        a,b = sorted([chances[i], chances[i+1]])
+        duo_freq[(a,b)] = duo_freq.get((a,b),0)+1
+
+    score = {n:0 for n in range(1,11)}
+    for (a,b), f in duo_freq.items():
+        score[a]+=f
+        score[b]+=f
+
+    return {s:r for r,(s,_) in 
+            enumerate(sorted(score.items(), key=lambda x:(-x[1], x[0])), start=1)}
 
 # =====================================================
 # CALCUL SCORES
